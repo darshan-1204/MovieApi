@@ -31,6 +31,7 @@ class MovieAdapter(results: List<ResultsItem?>?) : Adapter<MovieAdapter.MovieHol
         return results?.size!!
     }
 
+
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: MovieHolder, position: Int) {
         var str = "https://image.tmdb.org/t/p/w500"
@@ -38,19 +39,18 @@ class MovieAdapter(results: List<ResultsItem?>?) : Adapter<MovieAdapter.MovieHol
 
         holder.itemView.setOnClickListener {
 
-            var dialog =BottomSheetDialog(holder.itemView.context)
-            dialog.setContentView(R.layout.movie_item)
+            var dialog =BottomSheetDialog(holder.itemView.context, com.google.android.material.R.style.Base_Theme_Material3_Light_BottomSheetDialog)
 //            dialog.window?.setBackgroundDrawable(ColorDrawable(android.R.color.transparent))
-
+            dialog.setContentView(R.layout.movie_dialog)
             var movieName = dialog.findViewById<TextView>(R.id.movieName)
-            var Language = dialog.findViewById<TextView>(R.id.lang)
-            var RealeseDate = dialog.findViewById<TextView>(R.id.relaseDate)
+            var language = dialog.findViewById<TextView>(R.id.lang)
+            var realeseDate = dialog.findViewById<TextView>(R.id.relaseDate)
             var desc = dialog.findViewById<TextView>(R.id.description)
 
-            movieName?.setText(results?.get(position)?.originalTitle)
-            Language?.setText(results?.get(position)?.originalLanguage)
-            RealeseDate?.setText(results?.get(position)?.releaseDate)
-            desc?.setText(results?.get(position)?.overview)
+            movieName?.text = results?.get(position)?.originalTitle
+            language?.text = results?.get(position)?.originalLanguage
+            realeseDate?.text = results?.get(position)?.releaseDate
+            desc?.text = results?.get(position)?.overview
 
             dialog.show()
         }
